@@ -1,0 +1,668 @@
+{
+    "contractName": "ZombieFeeding",
+    "abi": [
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "zombieId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "dna",
+                    "type": "uint256"
+                }
+            ],
+            "name": "NewZombie",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "previousOwner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "OwnershipTransferred",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_name",
+                    "type": "string"
+                }
+            ],
+            "name": "createRandomZombie",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "isOwner",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "owner",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "renounceOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "transferOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "zombieToOwner",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "zombies",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "dna",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint32",
+                    "name": "level",
+                    "type": "uint32"
+                },
+                {
+                    "internalType": "uint32",
+                    "name": "readyTime",
+                    "type": "uint32"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.36+commit.8a079791\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"zombieId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"dna\",\"type\":\"uint256\"}],\"name\":\"NewZombie\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"}],\"name\":\"createRandomZombie\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isOwner\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"zombieToOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"zombies\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"dna\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"level\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"readyTime\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"d:/git/Solidity/contracts/zombiefeeding.sol\":\"ZombieFeeding\"},\"evmVersion\":\"osaka\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"d:/git/Solidity/contracts/owmable.sol\":{\"keccak256\":\"0x9886a2a730b7f4748fe1462d15c621ca46cc379958cd0aa44e47a1b63ee2e63c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d4b4c2d210d4cb09fd0ba5ab23e0a794a2e14ad525bd37de534858a5bfe33f30\",\"dweb:/ipfs/QmY21ab88bpP1YjvudBheyfQyqArxW83UX32KgCkfuYdS1\"]},\"d:/git/Solidity/contracts/zombiefactory.sol\":{\"keccak256\":\"0xf4550a25c15d8e4b1641bbd974f5ab689ff2c643d8c962b67eb10bff99ae61e4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://69842fb868591e7518508f89d1bd91aea093ccd7a91a80f985dcf6651f13f512\",\"dweb:/ipfs/QmVPNjg4RaAUepvHaTCBGw73fcEgq1xJSceySwpsZ6x5Ff\"]},\"d:/git/Solidity/contracts/zombiefeeding.sol\":{\"keccak256\":\"0xe757f58ad3523f3466dec8f5dfc9d883a1ecb7b7928e79a623cac98756c8fcaf\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://75c4c82b61b8e01202f48483c32151769d6669cded054c45038d988117d71157\",\"dweb:/ipfs/QmThCSFAywHJFFBhpqdKmVbzd4cNGk5efuGjAAUuYMtnPD\"]}},\"version\":1}",
+    "bytecode": "608080604052346064575f80546001600160a01b031916339081178255907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08180a36010600155662386f26fc100006002556201518060035561080790816100698239f35b5f80fdfe60806040526004361015610011575f80fd5b5f3560e01c80632052465e146105dd578063528b7b8f146105ab578063715018a6146105475780637bff0a011461018a5780638da5cb5b146101635780638f32d59b1461013d5763f2fde38b14610066575f80fd5b34610139576020366003190112610139576004356001600160a01b03811690819003610139576100a060018060a01b035f54163314610786565b80156100e5575f548160018060a01b0382167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e05f80a36001600160a01b031916175f55005b60405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152608490fd5b5f80fd5b34610139575f36600319011261013957602060018060a01b035f54163314604051908152f35b34610139575f366003190112610139575f546040516001600160a01b039091168152602090f35b346101395760203660031901126101395760043567ffffffffffffffff811161013957366023820112156101395780600401359067ffffffffffffffff82116104cf57604051916101e5601f8201601f191660200184610740565b8083526020830191366024838301011161013957815f92602460209301853784010152335f52600660205260405f205461050a576040516102426020828181019486518091875e81015f838201520301601f198101835282610740565b5190206002549081156104f65706906064820682039182116103f35760035442018042116103f357604051906080820182811067ffffffffffffffff8211176104cf57604052828252602082019184835260408101926001845263ffffffff6060830193168352600454680100000000000000008110156104cf578060016102cd92016004556106d8565b9290926104e3575180519067ffffffffffffffff82116104cf576102f18454610708565b601f811161047e575b50602090601f83116001146104125791806002949263ffffffff96945f92610407575b50508160011b915f199060031b1c19161782555b5160018201550192511667ffffffff000000008354925160201b169167ffffffffffffffff1916171790556004545f1981019081116103f357805f52600560205260405f20336bffffffffffffffffffffffff60a01b825416179055335f52600660205260405f20928354935f1985146103f35760017f88f026aacbbecc90c18411df4b1185fd8d9be2470f1962f192bf84a27d0704b7950190556103e86040519384938452606060208501526060840190610762565b9060408301520390a1005b634e487b7160e01b5f52601160045260245ffd5b015190508a8061031d565b90601f19831691855f52815f20925f5b818110610466575092600192859263ffffffff9896600298961061044e575b505050811b018255610331565b01515f1960f88460031b161c191690558a8080610441565b92936020600181928786015181550195019301610422565b828111156102fa57845f5260205f20601f840160051c90602085106104c7575b81601f9101920160051c03905f5b8281106104ba5750506102fa565b5f828201556001016104ac565b5f915061049e565b634e487b7160e01b5f52604160045260245ffd5b634e487b7160e01b5f525f60045260245ffd5b634e487b7160e01b5f52601260045260245ffd5b60405162461bcd60e51b815260206004820152601560248201527442616e20646120636f205a6f6d62696520726f692160581b6044820152606490fd5b34610139575f3660031901126101395761056b60018060a01b035f54163314610786565b5f8054906001600160a01b0382167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08280a36001600160a01b0319165f55005b34610139576020366003190112610139576004355f526005602052602060018060a01b0360405f205416604051908152f35b346101395760203660031901126101395760043560045481101561013957610604906106d8565b506040515f91805461061581610708565b80845290600181169081156106b4575060011461067b575b5061063d82610660940383610740565b63ffffffff60026001830154920154604051948594608086526080860190610762565b926020850152818116604085015260201c1660608301520390f35b9250805f5260205f205f905b84821061069e57508201602001925061063d61062d565b6001816020925483858801015201910190610687565b60ff191660208086019190915291151560051b8401909101935061063d905061062d565b6004548110156106f45760045f52600360205f20910201905f90565b634e487b7160e01b5f52603260045260245ffd5b90600182811c92168015610736575b602083101461072257565b634e487b7160e01b5f52602260045260245ffd5b91607f1691610717565b90601f8019910116810190811067ffffffffffffffff8211176104cf57604052565b805180835260209291819084018484015e5f828201840152601f01601f1916010190565b1561078d57565b606460405162461bcd60e51b815260206004820152602060248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152fdfea2646970667358221220764c9cb2918b067b7d624c77c1ed72970d80fa34dfc3188b7162e3030a6635e964736f6c63430008240033",
+    "deployedBytecode": "60806040526004361015610011575f80fd5b5f3560e01c80632052465e146105dd578063528b7b8f146105ab578063715018a6146105475780637bff0a011461018a5780638da5cb5b146101635780638f32d59b1461013d5763f2fde38b14610066575f80fd5b34610139576020366003190112610139576004356001600160a01b03811690819003610139576100a060018060a01b035f54163314610786565b80156100e5575f548160018060a01b0382167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e05f80a36001600160a01b031916175f55005b60405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152608490fd5b5f80fd5b34610139575f36600319011261013957602060018060a01b035f54163314604051908152f35b34610139575f366003190112610139575f546040516001600160a01b039091168152602090f35b346101395760203660031901126101395760043567ffffffffffffffff811161013957366023820112156101395780600401359067ffffffffffffffff82116104cf57604051916101e5601f8201601f191660200184610740565b8083526020830191366024838301011161013957815f92602460209301853784010152335f52600660205260405f205461050a576040516102426020828181019486518091875e81015f838201520301601f198101835282610740565b5190206002549081156104f65706906064820682039182116103f35760035442018042116103f357604051906080820182811067ffffffffffffffff8211176104cf57604052828252602082019184835260408101926001845263ffffffff6060830193168352600454680100000000000000008110156104cf578060016102cd92016004556106d8565b9290926104e3575180519067ffffffffffffffff82116104cf576102f18454610708565b601f811161047e575b50602090601f83116001146104125791806002949263ffffffff96945f92610407575b50508160011b915f199060031b1c19161782555b5160018201550192511667ffffffff000000008354925160201b169167ffffffffffffffff1916171790556004545f1981019081116103f357805f52600560205260405f20336bffffffffffffffffffffffff60a01b825416179055335f52600660205260405f20928354935f1985146103f35760017f88f026aacbbecc90c18411df4b1185fd8d9be2470f1962f192bf84a27d0704b7950190556103e86040519384938452606060208501526060840190610762565b9060408301520390a1005b634e487b7160e01b5f52601160045260245ffd5b015190508a8061031d565b90601f19831691855f52815f20925f5b818110610466575092600192859263ffffffff9896600298961061044e575b505050811b018255610331565b01515f1960f88460031b161c191690558a8080610441565b92936020600181928786015181550195019301610422565b828111156102fa57845f5260205f20601f840160051c90602085106104c7575b81601f9101920160051c03905f5b8281106104ba5750506102fa565b5f828201556001016104ac565b5f915061049e565b634e487b7160e01b5f52604160045260245ffd5b634e487b7160e01b5f525f60045260245ffd5b634e487b7160e01b5f52601260045260245ffd5b60405162461bcd60e51b815260206004820152601560248201527442616e20646120636f205a6f6d62696520726f692160581b6044820152606490fd5b34610139575f3660031901126101395761056b60018060a01b035f54163314610786565b5f8054906001600160a01b0382167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08280a36001600160a01b0319165f55005b34610139576020366003190112610139576004355f526005602052602060018060a01b0360405f205416604051908152f35b346101395760203660031901126101395760043560045481101561013957610604906106d8565b506040515f91805461061581610708565b80845290600181169081156106b4575060011461067b575b5061063d82610660940383610740565b63ffffffff60026001830154920154604051948594608086526080860190610762565b926020850152818116604085015260201c1660608301520390f35b9250805f5260205f205f905b84821061069e57508201602001925061063d61062d565b6001816020925483858801015201910190610687565b60ff191660208086019190915291151560051b8401909101935061063d905061062d565b6004548110156106f45760045f52600360205f20910201905f90565b634e487b7160e01b5f52603260045260245ffd5b90600182811c92168015610736575b602083101461072257565b634e487b7160e01b5f52602260045260245ffd5b91607f1691610717565b90601f8019910116810190811067ffffffffffffffff8211176104cf57604052565b805180835260209291819084018484015e5f828201840152601f01601f1916010190565b1561078d57565b606460405162461bcd60e51b815260206004820152602060248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152fdfea2646970667358221220764c9cb2918b067b7d624c77c1ed72970d80fa34dfc3188b7162e3030a6635e964736f6c63430008240033",
+    "sourceMap": "469:82:2:-:0;;;;;;;795:19:0;469:82:2;;-1:-1:-1;;;;;;469:82:2;804:10:0;469:82:2;;;;;804:10:0;911:40;795:19;;911:40;495:2:1;;469:82:2;;522:15:1;469:82:2;564:6:1;;469:82:2;;;;;;;;;;;",
+    "deployedSourceMap": "469:82:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;469:82:2;;;;;;-1:-1:-1;;;;;469:82:2;;;;;;;;1401:54:0;469:82:2;;;;;;;;1797:10:0;:20;1401:54;:::i;:::-;2613:22;;469:82:2;;;;;;;;;;;;2779:38:0;469:82:2;2779:38:0;;-1:-1:-1;;;;;;469:82:2;;;;;;;;-1:-1:-1;;;469:82:2;;;;;;;;;;;;;;;;;-1:-1:-1;;;469:82:2;;;;;;;;;;;;;;;;;-1:-1:-1;;469:82:2;;;;;;;;;;;;;1797:10:0;:20;469:82:2;;;;;;;;;;;;-1:-1:-1;;469:82:2;;;;;;;;-1:-1:-1;;;;;469:82:2;;;;;;;;;;;;;;-1:-1:-1;;469:82:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;469:82:2;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2886:10:1;469:82:2;;2869:16:1;469:82:2;;;;;;;;;;2493:22:1;469:82:2;2493:22:1;;;;469:82:2;;;;;;;;;;;;;;2493:22:1;;469:82:2;;2493:22:1;;;;;;:::i;:::-;469:82:2;2483:33:1;;2542:10;469:82:2;2535:17:1;469:82:2;;;;;3002:25:1;3023:3;469:82:2;;;;;;;;;1737:12:1;469:82:2;1719:15:1;469:82:2;1719:15:1;;469:82:2;;;;;;;;;;;;;;;;;;;;;;;;1689:62:1;;469:82:2;;;;;1689:62:1;;469:82:2;1709:1:1;469:82:2;;;1689:62:1;;;469:82:2;;;;;;;;;;;;;1709:1:1;469:82:2;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;2542:10:1;469:82:2;;;;;;;;;;;;;1709:1:1;469:82:2;;;;;1737:12:1;469:82:2;;;;;;;;;1709:1:1;469:82:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1973:13:1;469:82:2;;;;;2886:10:1;469:82:2;;;;;;;;;2886:10:1;469:82:2;;2869:16:1;469:82:2;;;;;;;;;;;;;;;1709:1:1;2062:26;469:82:2;;;;;;;;;;;;1689:62:1;469:82:2;;;;1689:62:1;469:82:2;;;;:::i;:::-;;;;;;2062:26:1;;;469:82:2;;;;;;;;;;;;;;;;;-1:-1:-1;469:82:2;;;;;;;;;;;;;;;;;;;;;;;;;;;1709:1:1;469:82:2;;;;;;2542:10:1;469:82:2;;;;;;;;;;;;;;;;;;;;;;;1737:12:1;469:82:2;;;;;;;;;;;;;;;;1709:1:1;469:82:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1709:1:1;469:82:2;;;;;;-1:-1:-1;469:82:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;469:82:2;;;;;;;;;;;;-1:-1:-1;;;469:82:2;;;;;;;;;;;;;-1:-1:-1;;469:82:2;;;;1401:54:0;469:82:2;;;;;;;;1797:10:0;:20;1401:54;:::i;:::-;469:82:2;;;;-1:-1:-1;;;;;469:82:2;;2069:40:0;469:82:2;;2069:40:0;-1:-1:-1;;;;;;469:82:2;;;;;;;;;;-1:-1:-1;;469:82:2;;;;;;;;1129:45:1;469:82:2;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;469:82:2;;;;;;;;1012:23:1;;;;;;;;:::i;:::-;469:82:2;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;1012:23:1;469:82:2;1012:23:1;;469:82:2;1012:23:1;;469:82:2;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;469:82:2;;;;;-1:-1:-1;469:82:2;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;469:82:2;;;;;;;;;;;;;;;;;;;;-1:-1:-1;469:82:2;;-1:-1:-1;469:82:2;;;;;;;;;;;-1:-1:-1;469:82:2;;;-1:-1:-1;469:82:2;;;;;-1:-1:-1;469:82:2;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;-1:-1:-1;469:82:2;;;;;;;;-1:-1:-1;;469:82:2;;;;:::o;:::-;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;",
+    "sourcePath": "d:/git/Solidity/contracts/zombiefeeding.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.36+commit.8a079791"
+    },
+    "ast": {
+        "absolutePath": "d:/git/Solidity/contracts/zombiefeeding.sol",
+        "exportedSymbols": {
+            "KittyInterface": [
+                300
+            ],
+            "Ownable": [
+                114
+            ],
+            "ZombieFactory": [
+                271
+            ],
+            "ZombieFeeding": [
+                306
+            ]
+        },
+        "id": 307,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 273,
+                "literals": [
+                    "solidity",
+                    "^",
+                    "0.8",
+                    ".0"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "33:23:2"
+            },
+            {
+                "absolutePath": "d:/git/Solidity/contracts/zombiefactory.sol",
+                "file": "./zombiefactory.sol",
+                "id": 274,
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "ImportDirective",
+                "scope": 307,
+                "sourceUnit": 272,
+                "src": "60:29:2",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "canonicalName": "KittyInterface",
+                "contractDependencies": [],
+                "contractKind": "interface",
+                "fullyImplemented": false,
+                "id": 300,
+                "linearizedBaseContracts": [
+                    300
+                ],
+                "name": "KittyInterface",
+                "nameLocation": "103:14:2",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "functionSelector": "e98b7f4d",
+                        "id": 299,
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "getKitty",
+                        "nameLocation": "134:8:2",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 277,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 276,
+                                    "mutability": "mutable",
+                                    "name": "_id",
+                                    "nameLocation": "151:3:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "143:11:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 275,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "143:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "142:13:2"
+                        },
+                        "returnParameters": {
+                            "id": 298,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 279,
+                                    "mutability": "mutable",
+                                    "name": "isGestating",
+                                    "nameLocation": "193:11:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "188:16:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 278,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "188:4:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 281,
+                                    "mutability": "mutable",
+                                    "name": "isReady",
+                                    "nameLocation": "220:7:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "215:12:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 280,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "215:4:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 283,
+                                    "mutability": "mutable",
+                                    "name": "cooldownIndex",
+                                    "nameLocation": "246:13:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "238:21:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 282,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "238:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 285,
+                                    "mutability": "mutable",
+                                    "name": "nextActionAt",
+                                    "nameLocation": "278:12:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "270:20:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 284,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "270:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 287,
+                                    "mutability": "mutable",
+                                    "name": "siringWithId",
+                                    "nameLocation": "309:12:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "301:20:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 286,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "301:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 289,
+                                    "mutability": "mutable",
+                                    "name": "birthTime",
+                                    "nameLocation": "340:9:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "332:17:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 288,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "332:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 291,
+                                    "mutability": "mutable",
+                                    "name": "matronId",
+                                    "nameLocation": "368:8:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "360:16:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 290,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "360:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 293,
+                                    "mutability": "mutable",
+                                    "name": "sireId",
+                                    "nameLocation": "395:6:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "387:14:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 292,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "387:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 295,
+                                    "mutability": "mutable",
+                                    "name": "generation",
+                                    "nameLocation": "420:10:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "412:18:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 294,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "412:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 297,
+                                    "mutability": "mutable",
+                                    "name": "genes",
+                                    "nameLocation": "449:5:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "441:13:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 296,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "441:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "177:284:2"
+                        },
+                        "scope": 300,
+                        "src": "125:337:2",
+                        "stateMutability": "view",
+                        "virtual": false,
+                        "visibility": "external"
+                    }
+                ],
+                "scope": 307,
+                "src": "93:372:2",
+                "usedErrors": [],
+                "usedEvents": []
+            },
+            {
+                "abstract": false,
+                "baseContracts": [
+                    {
+                        "baseName": {
+                            "id": 301,
+                            "name": "ZombieFactory",
+                            "nameLocations": [
+                                "495:13:2"
+                            ],
+                            "nodeType": "IdentifierPath",
+                            "referencedDeclaration": 271,
+                            "src": "495:13:2"
+                        },
+                        "id": 302,
+                        "nodeType": "InheritanceSpecifier",
+                        "src": "495:13:2"
+                    }
+                ],
+                "canonicalName": "ZombieFeeding",
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "fullyImplemented": true,
+                "id": 306,
+                "linearizedBaseContracts": [
+                    306,
+                    271,
+                    114
+                ],
+                "name": "ZombieFeeding",
+                "nameLocation": "478:13:2",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "constant": false,
+                        "id": 305,
+                        "mutability": "mutable",
+                        "name": "kittyContract",
+                        "nameLocation": "530:13:2",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 306,
+                        "src": "515:28:2",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_KittyInterface_$300",
+                            "typeString": "contract KittyInterface"
+                        },
+                        "typeName": {
+                            "id": 304,
+                            "nodeType": "UserDefinedTypeName",
+                            "pathNode": {
+                                "id": 303,
+                                "name": "KittyInterface",
+                                "nameLocations": [
+                                    "515:14:2"
+                                ],
+                                "nodeType": "IdentifierPath",
+                                "referencedDeclaration": 300,
+                                "src": "515:14:2"
+                            },
+                            "referencedDeclaration": 300,
+                            "src": "515:14:2",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_KittyInterface_$300",
+                                "typeString": "contract KittyInterface"
+                            }
+                        },
+                        "visibility": "internal"
+                    }
+                ],
+                "scope": 307,
+                "src": "469:82:2",
+                "usedErrors": [],
+                "usedEvents": [
+                    9,
+                    127
+                ]
+            }
+        ],
+        "src": "33:518:2"
+    },
+    "functionHashes": {
+        "createRandomZombie(string)": "7bff0a01",
+        "isOwner()": "8f32d59b",
+        "owner()": "8da5cb5b",
+        "renounceOwnership()": "715018a6",
+        "transferOwnership(address)": "f2fde38b",
+        "zombieToOwner(uint256)": "528b7b8f",
+        "zombies(uint256)": "2052465e"
+    },
+    "gasEstimates": {
+        "creation": {
+            "codeDepositCost": "411000",
+            "executionCost": "92526",
+            "totalCost": "503526"
+        },
+        "external": {
+            "createRandomZombie(string)": "infinite",
+            "isOwner()": "2380",
+            "owner()": "2359",
+            "renounceOwnership()": "28091",
+            "transferOwnership(address)": "28247",
+            "zombieToOwner(uint256)": "2353",
+            "zombies(uint256)": "infinite"
+        }
+    }
+}

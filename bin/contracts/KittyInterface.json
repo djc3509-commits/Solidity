@@ -1,0 +1,555 @@
+{
+    "contractName": "KittyInterface",
+    "abi": [
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_id",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getKitty",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "isGestating",
+                    "type": "bool"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "isReady",
+                    "type": "bool"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "cooldownIndex",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "nextActionAt",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "siringWithId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "birthTime",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "matronId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "sireId",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "generation",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "genes",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.36+commit.8a079791\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_id\",\"type\":\"uint256\"}],\"name\":\"getKitty\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isGestating\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isReady\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cooldownIndex\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nextActionAt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"siringWithId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"birthTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"matronId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"sireId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"generation\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"genes\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"d:/git/Solidity/contracts/zombiefeeding.sol\":\"KittyInterface\"},\"evmVersion\":\"osaka\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"d:/git/Solidity/contracts/owmable.sol\":{\"keccak256\":\"0x9886a2a730b7f4748fe1462d15c621ca46cc379958cd0aa44e47a1b63ee2e63c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d4b4c2d210d4cb09fd0ba5ab23e0a794a2e14ad525bd37de534858a5bfe33f30\",\"dweb:/ipfs/QmY21ab88bpP1YjvudBheyfQyqArxW83UX32KgCkfuYdS1\"]},\"d:/git/Solidity/contracts/zombiefactory.sol\":{\"keccak256\":\"0xf4550a25c15d8e4b1641bbd974f5ab689ff2c643d8c962b67eb10bff99ae61e4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://69842fb868591e7518508f89d1bd91aea093ccd7a91a80f985dcf6651f13f512\",\"dweb:/ipfs/QmVPNjg4RaAUepvHaTCBGw73fcEgq1xJSceySwpsZ6x5Ff\"]},\"d:/git/Solidity/contracts/zombiefeeding.sol\":{\"keccak256\":\"0xe757f58ad3523f3466dec8f5dfc9d883a1ecb7b7928e79a623cac98756c8fcaf\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://75c4c82b61b8e01202f48483c32151769d6669cded054c45038d988117d71157\",\"dweb:/ipfs/QmThCSFAywHJFFBhpqdKmVbzd4cNGk5efuGjAAUuYMtnPD\"]}},\"version\":1}",
+    "bytecode": "",
+    "deployedBytecode": "",
+    "sourceMap": "",
+    "deployedSourceMap": "",
+    "sourcePath": "d:/git/Solidity/contracts/zombiefeeding.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.36+commit.8a079791"
+    },
+    "ast": {
+        "absolutePath": "d:/git/Solidity/contracts/zombiefeeding.sol",
+        "exportedSymbols": {
+            "KittyInterface": [
+                300
+            ],
+            "Ownable": [
+                114
+            ],
+            "ZombieFactory": [
+                271
+            ],
+            "ZombieFeeding": [
+                306
+            ]
+        },
+        "id": 307,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 273,
+                "literals": [
+                    "solidity",
+                    "^",
+                    "0.8",
+                    ".0"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "33:23:2"
+            },
+            {
+                "absolutePath": "d:/git/Solidity/contracts/zombiefactory.sol",
+                "file": "./zombiefactory.sol",
+                "id": 274,
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "ImportDirective",
+                "scope": 307,
+                "sourceUnit": 272,
+                "src": "60:29:2",
+                "symbolAliases": [],
+                "unitAlias": ""
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "canonicalName": "KittyInterface",
+                "contractDependencies": [],
+                "contractKind": "interface",
+                "fullyImplemented": false,
+                "id": 300,
+                "linearizedBaseContracts": [
+                    300
+                ],
+                "name": "KittyInterface",
+                "nameLocation": "103:14:2",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "functionSelector": "e98b7f4d",
+                        "id": 299,
+                        "implemented": false,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "getKitty",
+                        "nameLocation": "134:8:2",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 277,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 276,
+                                    "mutability": "mutable",
+                                    "name": "_id",
+                                    "nameLocation": "151:3:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "143:11:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 275,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "143:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "142:13:2"
+                        },
+                        "returnParameters": {
+                            "id": 298,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 279,
+                                    "mutability": "mutable",
+                                    "name": "isGestating",
+                                    "nameLocation": "193:11:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "188:16:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 278,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "188:4:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 281,
+                                    "mutability": "mutable",
+                                    "name": "isReady",
+                                    "nameLocation": "220:7:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "215:12:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_bool",
+                                        "typeString": "bool"
+                                    },
+                                    "typeName": {
+                                        "id": 280,
+                                        "name": "bool",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "215:4:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_bool",
+                                            "typeString": "bool"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 283,
+                                    "mutability": "mutable",
+                                    "name": "cooldownIndex",
+                                    "nameLocation": "246:13:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "238:21:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 282,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "238:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 285,
+                                    "mutability": "mutable",
+                                    "name": "nextActionAt",
+                                    "nameLocation": "278:12:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "270:20:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 284,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "270:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 287,
+                                    "mutability": "mutable",
+                                    "name": "siringWithId",
+                                    "nameLocation": "309:12:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "301:20:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 286,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "301:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 289,
+                                    "mutability": "mutable",
+                                    "name": "birthTime",
+                                    "nameLocation": "340:9:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "332:17:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 288,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "332:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 291,
+                                    "mutability": "mutable",
+                                    "name": "matronId",
+                                    "nameLocation": "368:8:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "360:16:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 290,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "360:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 293,
+                                    "mutability": "mutable",
+                                    "name": "sireId",
+                                    "nameLocation": "395:6:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "387:14:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 292,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "387:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 295,
+                                    "mutability": "mutable",
+                                    "name": "generation",
+                                    "nameLocation": "420:10:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "412:18:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 294,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "412:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                },
+                                {
+                                    "constant": false,
+                                    "id": 297,
+                                    "mutability": "mutable",
+                                    "name": "genes",
+                                    "nameLocation": "449:5:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 299,
+                                    "src": "441:13:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 296,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "441:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "177:284:2"
+                        },
+                        "scope": 300,
+                        "src": "125:337:2",
+                        "stateMutability": "view",
+                        "virtual": false,
+                        "visibility": "external"
+                    }
+                ],
+                "scope": 307,
+                "src": "93:372:2",
+                "usedErrors": [],
+                "usedEvents": []
+            },
+            {
+                "abstract": false,
+                "baseContracts": [
+                    {
+                        "baseName": {
+                            "id": 301,
+                            "name": "ZombieFactory",
+                            "nameLocations": [
+                                "495:13:2"
+                            ],
+                            "nodeType": "IdentifierPath",
+                            "referencedDeclaration": 271,
+                            "src": "495:13:2"
+                        },
+                        "id": 302,
+                        "nodeType": "InheritanceSpecifier",
+                        "src": "495:13:2"
+                    }
+                ],
+                "canonicalName": "ZombieFeeding",
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "fullyImplemented": true,
+                "id": 306,
+                "linearizedBaseContracts": [
+                    306,
+                    271,
+                    114
+                ],
+                "name": "ZombieFeeding",
+                "nameLocation": "478:13:2",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "constant": false,
+                        "id": 305,
+                        "mutability": "mutable",
+                        "name": "kittyContract",
+                        "nameLocation": "530:13:2",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 306,
+                        "src": "515:28:2",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_KittyInterface_$300",
+                            "typeString": "contract KittyInterface"
+                        },
+                        "typeName": {
+                            "id": 304,
+                            "nodeType": "UserDefinedTypeName",
+                            "pathNode": {
+                                "id": 303,
+                                "name": "KittyInterface",
+                                "nameLocations": [
+                                    "515:14:2"
+                                ],
+                                "nodeType": "IdentifierPath",
+                                "referencedDeclaration": 300,
+                                "src": "515:14:2"
+                            },
+                            "referencedDeclaration": 300,
+                            "src": "515:14:2",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_KittyInterface_$300",
+                                "typeString": "contract KittyInterface"
+                            }
+                        },
+                        "visibility": "internal"
+                    }
+                ],
+                "scope": 307,
+                "src": "469:82:2",
+                "usedErrors": [],
+                "usedEvents": [
+                    9,
+                    127
+                ]
+            }
+        ],
+        "src": "33:518:2"
+    },
+    "functionHashes": {
+        "getKitty(uint256)": "e98b7f4d"
+    },
+    "gasEstimates": null
+}
