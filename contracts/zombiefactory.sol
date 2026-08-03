@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./owmable.sol";
+import "./Ownable.sol";
 
 // Kế thừa Ownable để sử dụng các tính năng phân quyền Admin sau này
 contract ZombieFactory is Ownable {
