@@ -1,26 +1,14 @@
 // SPDX-License-Identifier: MIT
-pragma solidity  ^0.8.0;
+pragma solidity ^0.8.0;
 
 import "./ZombieHelper.sol";
 
-contract ZombieAttack is ZombieHelper{
-function test() public view returns (uint, uint) {
+contract ZombieAttack is ZombieHelper {
     uint randNonce = 0;
 
-    uint random = uint(
-        keccak256(
-            abi.encodePacked(block.timestamp, msg.sender, randNonce)
-        )
-    ) % 100;
+    function randMod(uint _modulus) internal returns (uint) {
+        randNonce++;
 
-    randNonce++;
-
-    uint random2 = uint(
-        keccak256(
-            abi.encodePacked(block.timestamp, msg.sender, randNonce)
-        )
-    ) % 100;
-
-    return (random, random2);
-}
+        return uint(keccak256(abi.encodePacked(block.timestamp, msg.sender, randNonce))) % _modulus;
+    }
 }
