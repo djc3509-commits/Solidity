@@ -29,6 +29,15 @@ contract ZombieFeeding is ZombieFactory {
     // Biến lưu trữ địa chỉ của contract CryptoKitties trên mạng Ethereum
     KittyInterface kittyContract;
 
+    // Modifier kiểm tra quyền sở hữu
+    modifier ownerOf(uint _zombieId) {
+        require(
+            msg.sender == zombieToOwner[_zombieId],
+            "Khong phai chu cua con zombie nay"
+        );
+        _;
+    }
+
     // Cổng để Admin cập nhật địa chỉ CryptoKitties.
     // Tại sao không fix cứng? Vì nếu CryptoKitties bị hack hoặc đổi contract mới,
     // Admin vẫn có thể linh hoạt đổi địa chỉ mà không phải đập bỏ game của mình.
@@ -52,13 +61,7 @@ contract ZombieFeeding is ZombieFactory {
         uint _zombieId,
         uint _targetDna,
         string memory _species
-    ) internal {
-        // 1. Rào cản bảo mật: Chỉ chủ của con Zombie này mới có quyền cho nó ăn.
-        require(
-            msg.sender == zombieToOwner[_zombieId],
-            "Khong phai chu so huu"
-        );
-
+    ) internal ownerOf(_zombieId) {
         // 2. Lôi con Zombie từ DB ra bằng con trỏ 'storage'
         Zombie storage myZombie = zombies[_zombieId];
 
