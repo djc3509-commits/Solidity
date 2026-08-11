@@ -20,6 +20,8 @@ contract ZombieFactory is Ownable {
         uint dna;
         uint32 level;
         uint32 readyTime;
+        uint16 winCount;
+        uint16 lossCount;
     }
 
     // Mảng phẳng lưu trữ toàn bộ Zombie của game. Index của mảng chính là Zombie ID.
@@ -35,7 +37,7 @@ contract ZombieFactory is Ownable {
     function _createZombie(string memory _name, uint _dna) internal {
         // block.timestamp (thay thế cho biến now ở bản cũ) trả về thời gian hiện tại của block.
         zombies.push(
-            Zombie(_name, _dna, 1, uint32(block.timestamp + cooldownTime))
+            Zombie(_name, _dna, 1, uint32(block.timestamp + cooldownTime), 0, 0)
         );
 
         // Trong Solidity 0.8+, push không trả về độ dài mảng nữa.
