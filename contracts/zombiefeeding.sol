@@ -30,7 +30,7 @@ contract ZombieFeeding is ZombieFactory {
     KittyInterface kittyContract;
 
     // Modifier kiểm tra quyền sở hữu
-    modifier ownerOf(uint _zombieId) {
+    modifier onlyOwnerOf(uint _zombieId) {
         require(
             msg.sender == zombieToOwner[_zombieId],
             "Khong phai chu cua con zombie nay"
@@ -61,7 +61,7 @@ contract ZombieFeeding is ZombieFactory {
         uint _zombieId,
         uint _targetDna,
         string memory _species
-    ) internal ownerOf(_zombieId) {
+    ) internal onlyOwnerOf(_zombieId) {
         // 2. Lôi con Zombie từ DB ra bằng con trỏ 'storage'
         Zombie storage myZombie = zombies[_zombieId];
 
