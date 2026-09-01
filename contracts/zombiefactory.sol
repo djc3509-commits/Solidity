@@ -2,19 +2,43 @@
 pragma solidity ^0.8.0;
 
 import "./Ownable.sol";
+import "./SafeMath.sol";
 
-// Kế thừa Ownable để sử dụng các tính năng phân quyền Admin sau này
+/**
+ * @title Hợp đồng ZombieFactory
+ * @dev Hợp đồng cơ sở (base contract) quản lý việc khởi tạo và lưu trữ trạng thái của hệ sinh thái Zombie.
+ * Kế thừa Ownable để hỗ trợ phân quyền quản trị (Admin).
+ */
 contract ZombieFactory is Ownable {
-    // Event bắn tín hiệu ra ngoài Blockchain mỗi khi một Zombie mới ra đời.
-    // Frontend lắng nghe event này để cập nhật UI ngay lập tức mà không cần pull data.
+
+    /// @dev Tích hợp thư viện SafeMath để phòng tránh lỗi tràn số (overflow/underflow) cho kiểu uint256.
+    using SafeMath for uint256;
+
+    /// @dev Tích hợp thư viện SafeMath32 để phòng tránh lỗi tràn số cho kiểu uint32.
+    using SafeMath32 for uint32;
+
+    /// @dev Tích hợp thư viện SafeMath16 để phòng tránh lỗi tràn số cho kiểu uint16.
+    using SafeMath16 for uint16;
+
+    /**
+     * @dev Phát (emit) tín hiệu khi một cá thể Zombie mới được khởi tạo thành công.
+     * @param zombieId ID định danh duy nhất của Zombie vừa tạo
+     * @param name Tên của Zombie
+     * @param dna Mã gen (DNA) của Zombie
+     */
     event NewZombie(uint zombieId, string name, uint dna);
 
+    /// @dev Số lượng chữ số tối đa cho cấu trúc DNA của Zombie.
     uint dnaDigits = 16;
+    /// @dev Modulus dùng để đảm bảo DNA luôn nằm trong phạm vi 16 chữ số.
     uint dnaModulus = 10 ** dnaDigits;
-    uint cooldownTime = 1 days; // Đơn vị thời gian chuẩn của Solidity
+    /// @dev Thời gian chờ (cooldown) mặc định giữa các lần tương tác của Zombie.
+    uint cooldownTime = 1 days; 
 
-    // Struct định nghĩa Schema của một Zombie.
-    // Các biến uint32 được xếp cạnh nhau để tối ưu Slot Storage (Struct Packing).
+    /**
+     * @dev Cấu trúc dữ liệu cốt lõi định nghĩa các thuộc tính của một Zombie.
+     * Thuật toán Struct Packing: Các biến kích thước nhỏ (uint32, uint16) được xếp cạnh nhau để tối ưu hóa không gian lưu trữ (Storage Slot), giúp giảm thiểu phí Gas.
+     */
     struct Zombie {
         string name;
         uint dna;
@@ -24,50 +48,63 @@ contract ZombieFactory is Ownable {
         uint16 lossCount;
     }
 
-    // Mảng phẳng lưu trữ toàn bộ Zombie của game. Index của mảng chính là Zombie ID.
+    /// @dev Mảng động lưu trữ toàn bộ cá thể Zombie. Chỉ số (index) của mảng đóng vai trò là ID định danh (Zombie ID).
     Zombie[] public zombies;
 
-    // Mapping lập chỉ mục: Truy vấn nhanh Zombie ID thuộc về Ví nào.
+    /// @dev Ánh xạ (Mapping) từ ID của Zombie sang địa chỉ ví của chủ sở hữu hợp pháp.
     mapping(uint => address) public zombieToOwner;
-    // Mapping lập chỉ mục: Tra cứu nhanh một Ví đang sở hữu bao nhiêu con Zombie.
+
+    /// @dev Ánh xạ lưu trữ tổng số lượng Zombie mà một địa chỉ ví cụ thể đang kiểm soát.
     mapping(address => uint) ownerZombieCount;
 
-    // Hàm internal: Chỉ contract này và contract kế thừa nó mới gọi được.
-    // Xử lý logic ghi vào Database.
+    /**
+     * @dev Hàm nội bộ (internal) xử lý logic khởi tạo và ghi dữ liệu Zombie mới vào chuỗi khối (Blockchain).
+     * @param _name Tên được chỉ định cho Zombie
+     * @param _dna Mã gen DNA đã được tính toán cho Zombie
+     */
     function _createZombie(string memory _name, uint _dna) internal {
-        // block.timestamp (thay thế cho biến now ở bản cũ) trả về thời gian hiện tại của block.
+        // Khởi tạo đối tượng Zombie mới và đẩy vào mảng lưu trữ
         zombies.push(
             Zombie(_name, _dna, 1, uint32(block.timestamp + cooldownTime), 0, 0)
         );
 
-        // Trong Solidity 0.8+, push không trả về độ dài mảng nữa.
-        // ID của Zombie mới chính là độ dài mảng trừ đi 1.
+        // Trích xuất ID của Zombie vừa tạo (độ dài mảng trừ 1)
         uint id = zombies.length - 1;
 
+        // Cập nhật cơ sở dữ liệu về quyền sở hữu
         zombieToOwner[id] = msg.sender;
-        ownerZombieCount[msg.sender]++;
+        ownerZombieCount[msg.sender] = ownerZombieCount[msg.sender].add(1);
 
+        // Kích hoạt sự kiện thông báo cho Frontend
         emit NewZombie(id, _name, _dna);
     }
 
-    // Hàm view nội bộ tạo DNA ngẫu nhiên (Pseudo-random) dựa trên chuỗi string.
-    function _generateRandomDna(
-        string memory _str
-    ) private view returns (uint) {
-        // keccak256 là thuật toán băm (hash) chuẩn của Ethereum.
-        // abi.encodePacked dùng để nén chuỗi thành bytes trước khi băm.
+    /**
+     * @dev Hàm nội bộ sinh ra mã DNA giả ngẫu nhiên (Pseudo-random) dựa trên chuỗi ký tự đầu vào.
+     * @param _str Chuỗi ký tự hạt giống (seed string) để băm
+     * @return Mã DNA số nguyên không dấu gồm đúng 16 chữ số
+     */
+    function _generateRandomDna(string memory _str) private view returns (uint) {
+        // Sử dụng thuật toán băm keccak256 và nén dữ liệu qua abi.encodePacked
         uint rand = uint(keccak256(abi.encodePacked(_str)));
-        return rand % dnaModulus; // Đảm bảo DNA luôn có đúng 16 chữ số.
+        return rand % dnaModulus; 
     }
 
-    // Hàm Public: Cổng vào duy nhất cho người chơi mới.
+    /**
+     * @dev Cổng giao tiếp công khai (Public API) cho phép người dùng khởi tạo Zombie đầu tiên (miễn phí).
+     * @param _name Tên do người dùng đặt cho Zombie
+     */
     function createRandomZombie(string memory _name) public {
-        // Rào chắn bảo mật: Đảm bảo ví này chưa từng nhận Zombie miễn phí nào.
+        // Xác thực bảo mật: Đảm bảo ví thực thi chưa từng nhận Zombie nào trước đó
         require(ownerZombieCount[msg.sender] == 0, "Ban da co Zombie roi!");
 
+        // Khởi tạo DNA ngẫu nhiên
         uint randDna = _generateRandomDna(_name);
-        randDna = randDna - (randDna % 100); // Mẹo toán học làm tròn DNA.
+        
+        // Cấu trúc lại DNA: Đưa 2 chữ số cuối cùng về '00' (Dành không gian cho các đột biến lai tạo sau này)
+        randDna = randDna - (randDna % 100); 
 
+        // Gọi hàm nội bộ để ghi vào Blockchain
         _createZombie(_name, randDna);
     }
 }
