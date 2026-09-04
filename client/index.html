@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>CryptoZombies front-end</title>
+    <!-- Nhúng jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Nhúng Web3.js qua CDN (Cách chuẩn cho HTML tĩnh) -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  </head>
+  <body>
+
+    <script>
+        window.addEventListener("load", function(){
+            if(typeof web3 !== 'undefined'){
+                web3js = new Web3(web3.currentProvider);
+            }else{
+
+            }
+
+            startApp();
+        })
+    </script>
+  </body>
+</html>

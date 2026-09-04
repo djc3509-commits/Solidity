@@ -18,5 +18,8 @@
     "hardhat": "^3.11.1",
     "typescript": "~6.0.3",
     "viem": "^2.55.8"
+  },
+  "dependencies": {
+    "web3": "^4.16.0"
   }
 }
