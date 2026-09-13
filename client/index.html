@@ -20,6 +20,19 @@
           cryptoZombies = new web3js.eth.Contract(cryptoZombiesABI, cryptoZombiesAddress)
         }
 
+        function getZombieDetails(id) {
+          return cryptoZombies.methods.zombies(id).call();
+        }
+
+        // Lấy thông tin chủ sở hữu của zombie
+        function zombieToOwner(id) {
+          return cryptoZombies.methods.zombieToOwner(id).call();
+        }
+
+        // Lấy danh sách zombie của một người dùng
+        function getZombiesByOwner(owner){
+          return cryptoZombies.methods.getZombiesByOwner(owner).call();
+        }
 
         window.addEventListener("load", function(){
             if(typeof web3 !== 'undefined'){
