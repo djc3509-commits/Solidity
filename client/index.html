@@ -1,48 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>CryptoZombies front-end</title>
-    <!-- Nhúng jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Nhúng Web3.js qua CDN (Cách chuẩn cho HTML tĩnh) -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script language="javascript" type="text/javascript" src="cryptozombies_abi.js"></script>
-  </head>
-  <body>
 
-    <script>
+<head>
+  <meta charset="UTF-8">
+  <title>CryptoZombies front-end</title>
+  <!-- Nhúng jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Nhúng Web3.js qua CDN (Cách chuẩn cho HTML tĩnh) -->
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script language="javascript" type="text/javascript" src="cryptozombies_abi.js"></script>
+</head>
 
-        var cryptoZombies;
+<body>
+  <div id="zombies"></div>
 
-        function startApp(){
-          var cryptoZombiesAddress = "YOUR_CONTRACT_ADDRESS";
-          cryptoZombies = new web3js.eth.Contract(cryptoZombiesABI, cryptoZombiesAddress)
+  <script>
+
+    var cryptoZombies;
+    var userAccount;
+
+    function startApp() {
+      var cryptoZombiesAddress = "YOUR_CONTRACT_ADDRESS";
+      cryptoZombies = new web3js.eth.Contract(cryptoZombiesABI, cryptoZombiesAddress);
+
+      var accountInterval = setInterval(async function () {
+        if (web3.eth.accounts[0] !== userAccount) {
+          userAccount = web3.eth.accounts[0];
+
+          let ids = await getZombiesByOwner(userAccount)
+          displayZombies(ids)
         }
+      }, 100);
+    }
 
-        function getZombieDetails(id) {
-          return cryptoZombies.methods.zombies(id).call();
-        }
+    function displayZombies(dis) {
+      $("#zombies").empty();
+      for (const id of dis) {
+        getZombieDetails(id)
+          .then(function (zombie) {
+            $("#zombies").append(
+              `<div class="zombie">
+                  <ul>
+                    <li>Name: ${zombie.name}</li>
+                    <li>DNA: ${zombie.dna}</li>
+                    <li>Level: ${zombie.level}</li>
+                    <li>Wins: ${zombie.winCount}</li>
+                    <li>Losses: ${zombie.lossCount}</li>
+                    <li>Ready Time: ${zombie.readyTime}</li>
+                  </ul>
+                </div>
+              `
+            );
+          });
+      }
+    }
 
-        // Lấy thông tin chủ sở hữu của zombie
-        function zombieToOwner(id) {
-          return cryptoZombies.methods.zombieToOwner(id).call();
-        }
+    function getZombieDetails(id) {
+      return cryptoZombies.methods.zombies(id).call();
+    }
 
-        // Lấy danh sách zombie của một người dùng
-        function getZombiesByOwner(owner){
-          return cryptoZombies.methods.getZombiesByOwner(owner).call();
-        }
+    // Lấy thông tin chủ sở hữu của zombie
+    function zombieToOwner(id) {
+      return cryptoZombies.methods.zombieToOwner(id).call();
+    }
 
-        window.addEventListener("load", function(){
-            if(typeof web3 !== 'undefined'){
-                web3js = new Web3(web3.currentProvider);
-            }else{
+    // Lấy danh sách zombie của một người dùng
+    function getZombiesByOwner(owner) {
+      return cryptoZombies.methods.getZombiesByOwner(owner).call();
+    }
 
-            }
+    window.addEventListener("load", function () {
+      if (typeof web3 !== 'undefined') {
+        web3js = new Web3(web3.currentProvider);
+      } else {
 
-            startApp();
-        })
-    </script>
-  </body>
+      }
+
+      startApp();
+    })
+  </script>
+</body>
+
 </html>
