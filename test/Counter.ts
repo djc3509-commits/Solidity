@@ -32,13 +32,12 @@ describe("Counter", async function () {
       abi: counter.abi,
       eventName: "Increment",
       fromBlock: deploymentBlockNumber,
-      strict: true,
     });
 
     // check that the aggregated events match the current value
     let total = 0n;
     for (const event of events) {
-      total += event.args.by;
+      total += event.args.by!;
     }
 
     assert.equal(total, await counter.read.x());
