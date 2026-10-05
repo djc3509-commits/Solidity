@@ -1,0 +1,8 @@
+{
+  "extends": "solhint:all",
+  "rules": {
+    "compiler-version": ["error", "^0.8.28"],
+    "foundry-test-functions": "off",
+    "foundry-test-function-naming": "off"
+  }
+}

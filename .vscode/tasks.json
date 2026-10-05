@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "solhint",
+      "type": "shell",
+      "command": "npx solhint -f unix \"contracts/**/*.sol\"",
+      "problemMatcher": {
+        "owner": "solhint",
+        "source": "solhint",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+?):(\\d+):(\\d+):\\s+(.*)\\s+\\[(Error|Warning)/(.+)\\]$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4,
+          "severity": 5,
+          "code": 6
+        }
+      },
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "silent", "clear": true }
+    }
+  ]
+}
